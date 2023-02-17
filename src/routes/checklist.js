@@ -5,14 +5,14 @@ const router = express.Router()
 const Checklist = require('./models/checklist')
 
 // Pega todas as tasks do checklist
-router.get('/', async (req, res) => {
-  try {
-    let checklists = await Checklist.find({})
-    res.status(200).json(checklists)
-  } catch (err) {
-    res.status(400).json(err)
-  }
-})
+// router.get('/', async (req, res) => {
+//   try {
+//     let checklists = await Checklist.find({})
+//     res.status(200).json(checklists)
+//   } catch (err) {
+//     res.status(400).json(err)
+//   }
+// })
 
 // Pesquisa a task pelo id na url
 router.get('/:id', async (req, res) => {
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 // Cria uma tarefa
 router.post('/', async (req, res) => {
   let { name } = req.body
-  // re.body['name']
+  // req.body['name']
 
   try {
     let checklist = await Checklist.create({ "name": name })
