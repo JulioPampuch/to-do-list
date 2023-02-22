@@ -5,38 +5,46 @@ const router = express.Router()
 const Checklist = require('./models/checklist')
 
 // Pega todas as tasks do checklist
-// router.get('/', async (req, res) => {
-//   try {
-//     let checklists = await Checklist.find({})
-//     res.status(200).json(checklists)
-//   } catch (err) {
-//     res.status(400).json(err)
-//   }
-// })
+router.get('/', async (req, res) => {
+  try {
+    let checklists = await Checklist.find({})
+    res.status(200).render('checklists/index', { checklists: checklists })
+  } catch (err) {
+    res.status(500).render('checklists/error', { erro: 'Errro ao exibir as listas' })
+  }
+})
+
+router.get('/new', async (req, res) => {
+  try {
+    let checklist = new Checklist()
+    res.status(200).render('checklists/new', { checklist: checklist })
+  } catch (err) {
+    res.status(500).render('pages/error', { errors: 'Erro ao carregar o formulário' })
+  }
+})
+
 
 // Pesquisa a task pelo id na url
 router.get('/:id', async (req, res) => {
+  let checklist = await Checklist.findById(req.params.id)
   try {
-    let checklist = await Checklist.findById(req.params.id)
-    res.status(200).json(checklist)
+    res.status(200).render('checklists/show', { checklist: checklist })
   } catch (err) {
-    res.status(422).json(err)
+    res.status(422).render('checklists/new', { checklist: { ...checklist, err } })
   }
 })
 
 // Cria uma tarefa
 router.post('/', async (req, res) => {
-  let { name } = req.body
-  // req.body['name']
+  let { name } = req.body.checklist  // = req.body['name']
+  let checklist = new Checklist({ name: name })
 
   try {
-    let checklist = await Checklist.create({ "name": name })
-    res.status(200).json(checklist)
+    await checklist.save()
+    res.redirect('/checklists')
   } catch (error) {
-    res.status(422).json(error)
+    res.status(500).render('checklists/error', { erro: 'Errro ao criar checklist' })
   }
-
-  res.status(200).send(req.body)
 })
 
 // Atualiza uma task
