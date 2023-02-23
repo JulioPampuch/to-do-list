@@ -72,15 +72,12 @@ router.post('/', async (req, res) => {
 
 // Deleta uma task
 router.delete('/:id', async (req, res) => {
-  let { name } = req.body
-
   try {
-    let checklist = await Checklist.findByIdAndDelete(req.params.id, { name })
-    res.status(200).json(checklist)
+    let checklist = await Checklist.findByIdAndRemove(req.params.id)
+    res.redirect('/checklists')
   } catch (err) {
-    res.status(422).json(err)
+    res.status(500).render('checklists/error', { erro: 'Errro ao deletar checklist' })
   }
-
 })
 
 module.exports = router
