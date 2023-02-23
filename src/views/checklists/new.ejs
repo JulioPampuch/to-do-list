@@ -1,10 +1,10 @@
 <%- include('../layouts/header', {title: 'Todo-list' }) %>
   <%- include('../layouts/menu') %>
-  <section class="section">
-    <div class="container">
-      <h1 class="title size-4">Nova tarefa</h1>
-      <%- include('form', {method: 'post' , url: '/checklists' , checklist: checklist}) %>
-    </div> 
-  </section>
-  <%- console.log(checklist) %>
-    <%- include('../layouts/footer') %>
+    <section class="section">
+      <div class="container">
+        <h1 class="title size-4">Nova tarefa</h1>
+        <%- include('form', {url: '/checklists?_method=post' , checklist: checklist}) %>
+      </div>
+    </section>
+    <%- console.log(checklist) %>
+      <%- include('../layouts/footer') %>
