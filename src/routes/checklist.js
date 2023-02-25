@@ -48,8 +48,8 @@ router.put('/:id', async (req, res) => {
 
 // Pesquisa a task pelo id na url
 router.get('/:id', async (req, res) => {
-  let checklist = await Checklist.findById(req.params.id)
   try {
+    let checklist = await Checklist.findById(req.params.id).populate('tasks')
     res.status(200).render('checklists/show', { checklist: checklist })
   } catch (err) {
     res.status(422).render('checklists/new', { checklist: { ...checklist, err } })
@@ -68,7 +68,6 @@ router.post('/', async (req, res) => {
     res.status(500).render('checklists/error', { erro: 'Errro ao criar checklist' })
   }
 })
-
 
 // Deleta uma task
 router.delete('/:id', async (req, res) => {
