@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     let checklists = await Checklist.find({})
     res.status(200).render('checklists/index', { checklists: checklists })
   } catch (err) {
-    res.status(500).render('checklists/error', { erro: 'Errro ao exibir as listas' })
+    res.status(500).render('checklists/error', { erro: 'Erro ao exibir as listas' })
   }
 })
 
@@ -46,7 +46,7 @@ router.put('/:id', async (req, res) => {
   }
 })
 
-// Pesquisa a task pelo id na url
+// Mostra tasks
 router.get('/:id', async (req, res) => {
   try {
     let checklist = await Checklist.findById(req.params.id).populate('tasks')
@@ -56,7 +56,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// Cria uma tarefa
+// Cria uma task
 router.post('/', async (req, res) => {
   let { name } = req.body.checklist  // = req.body['name']
   let checklist = new Checklist({ name: name })
@@ -65,7 +65,7 @@ router.post('/', async (req, res) => {
     await checklist.save()
     res.redirect('/checklists')
   } catch (error) {
-    res.status(500).render('checklists/error', { erro: 'Errro ao criar checklist' })
+    res.status(500).render('checklists/error', { erro: 'Erro ao criar checklist' })
   }
 })
 
@@ -75,7 +75,7 @@ router.delete('/:id', async (req, res) => {
     let checklist = await Checklist.findByIdAndRemove(req.params.id)
     res.redirect('/checklists')
   } catch (err) {
-    res.status(500).render('checklists/error', { erro: 'Errro ao deletar checklist' })
+    res.status(500).render('checklists/error', { erro: 'Erro ao deletar checklist' })
   }
 })
 
