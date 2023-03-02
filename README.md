@@ -14,7 +14,7 @@
   <li>MongoDB</li>
 </ul>
 
-💾 Instalação
+<h2>💾 Instalação</h2>
 Siga os passos a baixo para executar o projeto!
 
 <h3>Clone o repositório</h3>
