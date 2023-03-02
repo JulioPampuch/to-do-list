@@ -19,7 +19,7 @@ Siga os passos a baixo para executar o projeto!
 
 <h3>Clone o repositório</h3>
 
-git clone https://github.com/JulioPampuch/to-do-list.git
+> git clone https://github.com/JulioPampuch/to-do-list.git
 
 <h3>Instale todas as dependências do projeto</h3>
 
