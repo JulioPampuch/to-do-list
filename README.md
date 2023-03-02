@@ -23,10 +23,10 @@ git clone https://github.com/JulioPampuch/to-do-list.git
 
 <h3>Instale todas as dependências do projeto</h3>
 
-npm install
+> npm install
 
 <h3>Dê start na apliação</h3>
 
-npm run dev
+> npm run dev
 
 Em seguida acesse http://localhost:3000/checklists no seu navegador. Após isso é só se divertir criando seus cards de tarefas e atividades. :)
